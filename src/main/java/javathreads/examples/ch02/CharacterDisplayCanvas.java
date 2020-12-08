@@ -6,12 +6,12 @@ import java.awt.*;
 public class CharacterDisplayCanvas extends JComponent implements CharacterListener {
     protected FontMetrics fm;
     protected char[] tmpChar = new char[1];
-    protected int fontHeght;
+    protected int fontHeight;
 
     public CharacterDisplayCanvas() {
         setFont(new Font("Monospaced", Font.BOLD, 18));
-        fm = Toolkit.getDefaultToolkit().getFontMetrics(getFont());
-        fontHeght = fm.getHeight();
+        fm = getFontMetrics(getFont());
+        fontHeight = fm.getHeight();
     }
 
     public CharacterDisplayCanvas(CharacterSource characterSource) {
@@ -23,7 +23,7 @@ public class CharacterDisplayCanvas extends JComponent implements CharacterListe
         characterSource.addCharacterListener(this);
     }
 
-    public Dimension preferredSize() {
+    public Dimension getPreferredSize() {
         return new Dimension(fm.getMaxAscent() + 10, fm.getMaxAdvance() + 10);
     }
 
@@ -34,7 +34,7 @@ public class CharacterDisplayCanvas extends JComponent implements CharacterListe
             return;
         }
         int charWidth = fm.charWidth((int) tmpChar[0]);
-        gc.drawChars(tmpChar, 0, 1, (d.width - charWidth) / 2, fontHeght);
+        gc.drawChars(tmpChar, 0, 1, (d.width - charWidth) / 2, fontHeight);
     }
 
     @Override

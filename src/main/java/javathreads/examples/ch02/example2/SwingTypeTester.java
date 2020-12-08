@@ -29,8 +29,8 @@ public class SwingTypeTester extends JFrame implements CharacterSource {
         add(displayCanvas, BorderLayout.NORTH);
         add(feedbackCanvas, BorderLayout.CENTER);
         JPanel p = new JPanel();
-        startButton.setLabel("Start");
-        quitButton.setLabel("Quit");
+        startButton.setText("Start");
+        quitButton.setText("Quit");
         p.add(startButton);
         p.add(quitButton);
         add(p, BorderLayout.SOUTH);
@@ -47,21 +47,18 @@ public class SwingTypeTester extends JFrame implements CharacterSource {
             public void keyPressed(KeyEvent e) {
                 char c = e.getKeyChar();
                 if (c != KeyEvent.CHAR_UNDEFINED) {
-                    newCharacter((int) c);
+                    newCharacter(c);
                 }
             }
         });
 
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                producer = new RandomCharacterGenerator();
-                displayCanvas.setCharacterSource(producer);
-                producer.start();
-                startButton.setEnabled(false);
-                feedbackCanvas.setEnabled(true);
-                feedbackCanvas.requestFocus();
-            }
+        startButton.addActionListener(e -> {
+            producer = new RandomCharacterGenerator();
+            displayCanvas.setCharacterSource(producer);
+            producer.start();
+            startButton.setEnabled(false);
+            feedbackCanvas.setEnabled(true);
+            feedbackCanvas.requestFocus();
         });
     }
 
@@ -89,6 +86,6 @@ public class SwingTypeTester extends JFrame implements CharacterSource {
     }
 
     public static void main(String[] args) {
-        new SwingTypeTester().show();
+        new SwingTypeTester().setVisible(true);
     }
 }
