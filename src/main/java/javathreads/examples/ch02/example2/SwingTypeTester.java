@@ -86,6 +86,8 @@ public class SwingTypeTester extends JFrame implements CharacterSource {
     }
 
     public static void main(String[] args) {
-        new SwingTypeTester().setVisible(true);
+        SwingTypeTester typeTester = new SwingTypeTester();
+        typeTester.setSize(200, 200);
+        typeTester.setVisible(true);
     }
 }
