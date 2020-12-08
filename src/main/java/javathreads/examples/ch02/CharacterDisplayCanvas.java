@@ -19,7 +19,7 @@ public class CharacterDisplayCanvas extends JComponent implements CharacterListe
         setCharacterSource(characterSource);
     }
 
-    private void setCharacterSource(CharacterSource characterSource) {
+    public void setCharacterSource(CharacterSource characterSource) {
         characterSource.addCharacterListener(this);
     }
 
@@ -39,6 +39,7 @@ public class CharacterDisplayCanvas extends JComponent implements CharacterListe
 
     @Override
     public synchronized void newCharacter(CharacterEvent characterEvent) {
-
+        tmpChar[0] = (char) characterEvent.character;
+        repaint();
     }
 }
