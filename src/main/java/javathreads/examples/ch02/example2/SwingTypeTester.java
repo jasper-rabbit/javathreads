@@ -60,6 +60,9 @@ public class SwingTypeTester extends JFrame implements CharacterSource {
             feedbackCanvas.setEnabled(true);
             feedbackCanvas.requestFocus();
         });
+
+        quitButton.addActionListener(e -> quit());
+        pack();
     }
 
     private void newCharacter(int c) {
@@ -87,7 +90,6 @@ public class SwingTypeTester extends JFrame implements CharacterSource {
 
     public static void main(String[] args) {
         SwingTypeTester typeTester = new SwingTypeTester();
-        typeTester.setSize(200, 200);
         typeTester.setVisible(true);
     }
 }
