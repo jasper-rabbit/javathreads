@@ -70,7 +70,7 @@ public class SwingTypeTester extends JFrame implements CharacterSource {
         stopButton.addActionListener(e -> {
             startButton.setEnabled(true);
             stopButton.setEnabled(false);
-            producer.setDone();
+            producer.interrupt();
             feedbackCanvas.setEnabled(false);
         });
         pack();
