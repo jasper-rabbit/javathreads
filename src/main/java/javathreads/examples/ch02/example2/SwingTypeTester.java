@@ -15,6 +15,7 @@ public class SwingTypeTester extends JFrame implements CharacterSource {
     private CharacterDisplayCanvas feedbackCanvas;
     private JButton quitButton;
     private JButton startButton;
+    private JButton stopButton;
     private CharacterEventHandler handler;
     public SwingTypeTester() {
         initComponents();
@@ -26,13 +27,16 @@ public class SwingTypeTester extends JFrame implements CharacterSource {
         feedbackCanvas = new CharacterDisplayCanvas(this);
         quitButton = new JButton();
         startButton = new JButton();
+        stopButton = new JButton();
         add(displayCanvas, BorderLayout.NORTH);
         add(feedbackCanvas, BorderLayout.CENTER);
         JPanel p = new JPanel();
         startButton.setText("Start");
         quitButton.setText("Quit");
+        stopButton.setText("Stop");
         p.add(startButton);
         p.add(quitButton);
+        p.add(stopButton);
         add(p, BorderLayout.SOUTH);
 
         addWindowListener(new WindowAdapter() {
@@ -57,11 +61,18 @@ public class SwingTypeTester extends JFrame implements CharacterSource {
             displayCanvas.setCharacterSource(producer);
             producer.start();
             startButton.setEnabled(false);
+            stopButton.setEnabled(true);
             feedbackCanvas.setEnabled(true);
             feedbackCanvas.requestFocus();
         });
 
         quitButton.addActionListener(e -> quit());
+        stopButton.addActionListener(e -> {
+            startButton.setEnabled(true);
+            stopButton.setEnabled(false);
+            producer.setDone();
+            feedbackCanvas.setEnabled(false);
+        });
         pack();
     }
 

@@ -14,6 +14,7 @@ public class RandomCharacterGenerator extends Thread implements CharacterSource 
     }
     Random random;
     CharacterEventHandler handler;
+    private volatile boolean done = false;
 
     public RandomCharacterGenerator() {
         random = new Random();
@@ -41,7 +42,7 @@ public class RandomCharacterGenerator extends Thread implements CharacterSource 
 
     @Override
     public void run() {
-        for (;;) {
+        while (!done) {
             nextCharacter();
             try {
                 Thread.sleep(getPauseTime());
@@ -49,5 +50,9 @@ public class RandomCharacterGenerator extends Thread implements CharacterSource 
                 return;
             }
         }
+    }
+
+    public void setDone() {
+        this.done = true;
     }
 }
